@@ -1,0 +1,37 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.4 Chrome/138.0.7204.97 Electron/37.2.1 Safari/537.36" version="28.0.4">
+  <diagram name="Page-1" id="vQ2mK0EnT-6js1-fZF_a">
+    <mxGraphModel dx="2170" dy="1236" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-1" value="Requirements:&amp;nbsp;&lt;div&gt;- Add&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Subtract&amp;nbsp;&lt;/div&gt;&lt;div&gt;-Mutliply&lt;/div&gt;&lt;div&gt;-Divide&lt;/div&gt;&lt;div&gt;-Buttons for each digit + Operator&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Use:&amp;nbsp;&lt;/div&gt;&lt;div&gt;User enters number, operator, second number, operator, third number&lt;/div&gt;&lt;div&gt;- Round decimals&lt;/div&gt;&lt;div&gt;- Clear Button should wipe out all existing data&lt;/div&gt;&lt;div&gt;- Divide by zero protection&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Do not respond to sequential operator instructions&lt;/div&gt;&lt;div&gt;- From result, pressing digit should clear and start new calculation&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Extra:&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Backspace&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Keyboard support&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Floating points numbers (add support for 1x . )&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="200" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-2" value="Calculator" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="180" y="40" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-3" value="Functions:&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;add() -&amp;gt; add operator&amp;nbsp;&lt;/div&gt;&lt;div&gt;subtract() -&amp;gt; subtract operator&lt;/div&gt;&lt;div&gt;multiply() -&amp;gt; multiplication operator&amp;nbsp;&lt;/div&gt;&lt;div&gt;divide() -&amp;gt; division operator&lt;/div&gt;&lt;div&gt;decimal() -&amp;gt; decimal operator&lt;/div&gt;&lt;div&gt;round() -&amp;gt; round decimals&amp;nbsp;&lt;/div&gt;&lt;div&gt;backspace() -&amp;gt; remove last number input&lt;/div&gt;&lt;div&gt;clear() -&amp;gt; clear screen and data&amp;nbsp;&lt;/div&gt;&lt;div&gt;newDigit() -&amp;gt; clear on new digit selection?&amp;nbsp;&lt;/div&gt;&lt;div&gt;checkInstructions() -&amp;gt; ensure instructions follow correct pattern&lt;/div&gt;&lt;div&gt;divideByZero() -&amp;gt; snarky error message, protection here in other functions?&amp;nbsp;&lt;/div&gt;&lt;div&gt;keyboardInput() -&amp;gt; here or in service?&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="120" width="310" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-4" value="&lt;b&gt;&lt;br&gt;&lt;br&gt;Components:&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;AppComponent (try without main container) - semantic / organizational&lt;/div&gt;&lt;div&gt;HeaderComponent&amp;nbsp;&lt;/div&gt;&lt;div&gt;FooterComponent&lt;/div&gt;&lt;div&gt;BodyComponent - actual &quot;body&quot; of calculator, used to organize screen and inputs&amp;nbsp;&lt;/div&gt;&lt;div&gt;DisplayComponent - &quot;dumb&quot; -&amp;gt; only displays data styled to look like vintage calculator&amp;nbsp;&lt;/div&gt;&lt;div&gt;InputComponent - &quot;dumb&quot; -&amp;gt; displays buttons and passes in user input to service but does no operations&amp;nbsp;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="420" width="390" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-5" value="&lt;b&gt;Service&lt;/b&gt;:&amp;nbsp;&lt;div&gt;calculator.service.ts&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- Takes in input data from InputComponent and performs logical operations&amp;nbsp;&lt;/div&gt;&lt;div&gt;- Returns modified data to DisplayComponent&amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="550" width="340" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-6" value="Workflow:&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;- AppComponent loads Header, Footer directly&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;- Loads Body via router-outlet&lt;/div&gt;&lt;div&gt;- Body loads and contains Dispay and Input&amp;nbsp;&lt;/div&gt;&lt;div&gt;- User selects buttons within Input &amp;gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Input passes value or operator to Service &amp;gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Service checks to see what operation needs to be performed &amp;gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;performs operation &amp;gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;sends data to Display &amp;gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Display updates to now show new data from Service &amp;gt;&amp;nbsp;&lt;/div&gt;&lt;div&gt;Depending on whether val or operator last entered, state of digits either completes operation or clears data&amp;nbsp;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="710" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-7" value="AppComponent&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="365" width="290" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-8" value="AppComponent&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="720" width="290" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="VFt6B_3ewhJ_eVhufghd-9" value="AppComponent&amp;nbsp;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="20" width="290" height="255" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

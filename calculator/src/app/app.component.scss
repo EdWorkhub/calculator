@@ -1,0 +1,31 @@
+/* || RESET */ 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    caret-color: transparent;
+}
+
+/* || COMPONENT CONTAINER / FLEXBOX */ 
+// 100vh height at Component Container level
+
+.app-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* || COMPONENT SPATIAL MNGMT */ 
+
+router-outlet {
+    flex: 1 0 auto;
+}
+
+app-header,
+app-footer {
+    flex-shrink: 0;
+}
+
