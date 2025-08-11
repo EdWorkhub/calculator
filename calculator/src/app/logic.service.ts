@@ -13,7 +13,9 @@ export class LogicService {
   sessionHistory: Array<string> = [];
   // Tracks most recent Input val (incl. operators)
   currentValue!: string;
-  // Tracks prior Input val 
+  // Tracks upcoming operator 
+  currentOperator!: string;
+  // Tracks prior Display val 
   lastValue!: string;
 
   // FUNCTIONS 
@@ -37,7 +39,22 @@ export class LogicService {
     return divisionTotal;
   }
 
-  mathOperations(val: number, val2: number) {
-    
+  mathOperations(val: number, val2: number, operator: string) {
+    switch (operator) {
+      case '+': return val = val2; 
+      case '-': return val - val2;
+      case '*': return val * val2;
+      case '/': return val / val2;
+      default: throw new Error('Invalid operator')
+    }
+  }
+
+  checkInput(val: string) {
+    if (Number.isFinite(Number(val))) {
+      this.currentValue = val;
+      return 'number'
+    } else if (['+', '-', '*', '/', '.', '='].includes(val)) {
+      return 'operator'
+    }
   }
 }
