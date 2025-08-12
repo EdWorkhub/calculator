@@ -19,7 +19,9 @@ export class InputComponent {
 
   // FUNCTIONS 
   onClickButton(val: string) {
-    this.logicService.checkInput(val);
+    // Get val from template 
+    // identifyInput 
+    this.logicService.identifyInput(val);
   }
 
 
