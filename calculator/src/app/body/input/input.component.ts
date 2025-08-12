@@ -19,7 +19,7 @@ export class InputComponent {
 
   // FUNCTIONS 
   onClickButton(val: string) {
-    checkInput(val);
+    this.logicService.checkInput(val);
   }
 
 

@@ -12,33 +12,13 @@ export class LogicService {
   // Tracks values entered into calculator during same "session" - clearing involves emptying this Array 
   sessionHistory: Array<string> = [];
   // Tracks most recent Input val (incl. operators)
-  currentValue!: string;
+  currentValue: string = '';
   // Tracks upcoming operator 
   currentOperator!: string;
   // Tracks prior Display val 
-  lastValue!: string;
+  priorValue: string = '';
 
   // FUNCTIONS 
-  addDigit(val: number, val2: number) {
-    const additionTotal = (val + val2);
-    return additionTotal;
-  }
-
-  subtrackDigit(val: number, val2: number) {
-    const subtractionTotal = (val - val2);
-    return subtractionTotal;
-  }
-
-  multiplyDigit(val: number, val2: number) {
-    const multiplicationTotal = (val * val2);
-    return multiplicationTotal;
-  }
-
-  divideDigit(val: number, val2: number) {
-    const divisionTotal = (val / val2);
-    return divisionTotal;
-  }
-
   mathOperations(val: number, val2: number, operator: string) {
     switch (operator) {
       case '+': return val = val2; 
@@ -50,11 +30,23 @@ export class LogicService {
   }
 
   checkInput(val: string) {
+    // If can convert String val to Number and isFinite value, continue 
     if (Number.isFinite(Number(val))) {
+      // If currentValue is operator, continue (to protect against multiple digit entries)
+      if (['+', '-', '*', '/', '.', '=', ''].includes(this.currentValue)) {
+        // If is a valid number and currentValue is operator, change currentValue to number and then operate
+        this.currentValue = val;
+        return 'number'
+      } 
+      // else if is operator and this.currentValue is Number, continue
+    } else if (['+', '-', '*', '/', '.', '='].includes(val) && Number.isFinite(Number(this.currentValue)) ) {
+      // set currentValue to operator value and set currentOperator to operator value
+      this.currentOperator = val;
       this.currentValue = val;
-      return 'number'
-    } else if (['+', '-', '*', '/', '.', '='].includes(val)) {
       return 'operator'
+    } else {
+      return 'invalid'
     }
+    return
   }
 }
