@@ -10,7 +10,7 @@ export class LogicService {
   // PROPERTIES 
 
   // Tracks values entered into calculator during same "session" - clearing involves emptying this Array 
-  sessionHistory: Array<string> = [];
+  sessionHistory: Array<any> = [];
   // Tracks most recent Input val (incl. operators)
   currentValue!: string;
   // Tracks prior Display val
@@ -18,9 +18,13 @@ export class LogicService {
   // Tracks currently selected Operator 
   currentOperator!: string;
   // Tracks if numeric digit is currently a valid input based on where you are in workflow (must go digit > operator > digit)
-  numberPresent!: boolean;
+  firstNumberPresent!: number;
+  // Tracks if numeric digit is currently a valid input based on where you are in workflow (must go digit > operator > digit)
+  secondNumberPresent!: number;
   // Tracks if operator has been entered 
-  operatorPresent!: boolean; 
+  firstOperatorPresent!: string;
+  // Tracks if operator has been entered 
+  secondOperatorPresent!: string;
   // Tracks result of operation 
   result!: number; 
 
@@ -39,56 +43,62 @@ export class LogicService {
     // If all three values are truthy 
     if (this.priorValue, this.currentOperator, this.currentValue) {
       // Perform operation 
-      this.result = this.mathOperations(parseInt(val), parseInt(this.priorValue), this.currentOperator)
+      this.result = this.mathOperations(this.firstNumberPresent, this.secondNumberPresent, this.firstOperatorPresent)
+      this.firstOperatorPresent = this.secondOperatorPresent;
       console.log(this.result);
       return this.result;
     }
     return 0;
   }
 
+  // Workflow Restriction (number, operator, number, operator (perform), number (perform), operator (perform)
+  // Find if input value is number or operator 
+  // Array Logic 
+  // if empty and input is number, add number to array 
+  // if empty and input is operator, no action 
+  // if number present and input is number, replace existing number 
+  // if number present and input is operator, add operator to array 
+  // if np and op and input is number, add number to array 
+  // if np and op and input is operator, no action 
+  // if np and op and np and input is number, replace existing number 
+  // if np and op and np and input is operator, perform operation on number based on np1, op1, np2 and store op2 for next op 
+
   identifyInput(val: string): boolean {
     // If can convert String val to Number and isFinite value, continue 
     if (Number.isFinite(Number(val))) {
-        return this.validateInput('number');
+        this.processNumber(Number(val))
       }
     else if (['+', '-', '*', '/', '.', '='].includes(val)) {
-      this.currentOperator = val;
-      return this.validateInput('operator');
-      
+      this.processOperator(val)
     } 
     return false;
   }
 
-  validateInput(val: string): boolean {
-    if (val === 'number' && !this.numberPresent) {
-      // If val is number and no number is present, set val to number and make number present 
-      this.currentValue = val;
-      this.numberPresent = true; 
-      return false // no operation
-    } else if (val === 'number' && this.numberPresent) {
-      // If val is number and number is last input, replace last input with new number 
-      this.currentValue = val;
-      this.numberPresent = true; 
-      return false // no operation 
-      // If val is operator and no number is yet present, skip or throw error? 
-    } else if (val === 'operator' && !this.numberPresent) {
-      return false;
-    } else if (val === 'operator' && this.numberPresent && !this.operatorPresent) {
-      // If val is operator, current value is number and no currentOperator exists, 
-      // set operator to currentValue and number to priorValue
-      this.priorValue = this.currentValue;
-      this.currentValue = val;
-      this.operatorPresent = true;
-      return false // no operation 
-    } else if (val === 'operator' && this.numberPresent && this.operatorPresent) {
-      // If val is operator, current value is number and operator is already present
-      // Perform operation
-      // this.performOperation(this.currentValue);
-      // this.priorValue = this.currentValue;
-      return true;
+  processNumber(val: number) {
+    if (!this.firstNumberPresent) {
+      this.firstNumberPresent = val;
+      this.sessionHistory.push(val);
+    } else if (this.firstNumberPresent && !this.secondNumberPresent) {
+      this.secondNumberPresent = val;
+      this.sessionHistory.push(val);
+    } else {
+      this.firstNumberPresent = this.secondNumberPresent;
+      this.secondNumberPresent = NaN;
+      this.sessionHistory.shift();
+    }
   }
-  return false;
-}
+
+  processOperator(val: string) {
+    if (!this.firstOperatorPresent) {
+      this.firstOperatorPresent = val;
+      this.sessionHistory.push(val);
+    } else if (this.firstOperatorPresent && !this.secondOperatorPresent) {
+      this.secondOperatorPresent = val;
+      this.sessionHistory.push(val);
+      this.performOperation(this.secondOperatorPresent);
+    }
+  }
+
 }
   // identifyInput = 'number' | 'operator', validateInput = true | false, 
   // Find type > if conditionally valid, perform operations > else fail 
