@@ -1,11 +1,11 @@
 <div class="input-container">
-    <!-- use ngFor for all items in array of numers and operators? -->
+    <!-- use ngFor for all items in array of numbers and operators? -->
      <div class="input-button">
-        <button class="input" id="1" (click)="onClickButton('1')">
-            1
+        <button class="input-button-number" *ngFor="let number of numericValues" id="number" (click)="submitInput(number)">
+            {{number}}
         </button>
-        <button class="input" id="+" (click)="onClickButton('+')">
-            +
+        <button class="input-button-operator" *ngFor="let operator of operatorValues" id="operator" (click)="submitInput(operator)">
+            {{operator}}
         </button>
      </div>
 </div>

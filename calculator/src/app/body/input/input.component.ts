@@ -17,23 +17,12 @@ export class InputComponent {
   isNumber!: boolean;
   isOperator!: boolean;
   buttonActive: boolean = true;
+  numericValues: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  operatorValues: Array<string> = ["+", "-", "*", "/", "="]
 
   // FUNCTIONS 
-  onClickButton(val: string) {
-    // Get val from template 
-    // identifyInput checks to see if number or operator 
-    // Passes to validateInput to check to see if is valid entry based on position within workflow 
-    // validateInput then passes to mathOperations if determined to be valid input 
-    // Should pass result to DisplayComponent 
 
-    // If val is valid (i.e number or operator)
-    if (this.logicService.identifyInput(val)) {
-      // Perform Operation
-      this.currentValue = this.logicService.performOperation(val);
-      console.log(this.currentValue);
-    } else {
-      let value = Number(val);
-      console.log(value);
-    }
+  submitInput(value: string | number) {
+    this.logicService.parseInput(value)
   }
 }
