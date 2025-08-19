@@ -9,21 +9,19 @@ import { LogicService } from '../../logic.service';
 })
 export class DisplayComponent {
 
-  constructor(private logicService: LogicService) {
-
-  }
+  constructor(private logicService: LogicService) {}
 
   ngOnInit() {
     this.logicService.display$.subscribe(display => {
-      if (display) {
-        this.updateDisplay(display);
-      }
-    });
+      this.displayValue = display;
+    })
   }
+
 
   updateDisplay(value: number) {
     this.displayValue = value;
   }
-
+  
+  testNumber: number = 1;
   displayValue!: number;
 }

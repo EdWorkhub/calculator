@@ -9,10 +9,9 @@ export class LogicService {
   constructor() { }
 
   // V2 
-
   // PROPERTIES 
   // Input Tracking 
-  accumulatorValue: number = 1;
+  accumulatorValue!: number;
   inputValue!: number;
   operatorValue!: string; 
 
@@ -23,6 +22,7 @@ export class LogicService {
     } else {
       console.log('Number: ', value);
       this.processNumber(value);
+      this.updateDisplay();
     }
   }
 
@@ -66,7 +66,7 @@ export class LogicService {
   returnDisplay() {
     return this.accumulatorValue;
   }
-  private displayValue = new BehaviorSubject<number>(this.returnDisplay());
+  private displayValue = new BehaviorSubject<number>(1);
   display$ = this.displayValue.asObservable(); 
   updateDisplay() {
     this.displayValue.next(this.returnDisplay());
