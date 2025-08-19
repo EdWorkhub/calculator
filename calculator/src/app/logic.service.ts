@@ -86,9 +86,9 @@ export class LogicService {
       // this.performOperation(this.currentValue);
       // this.priorValue = this.currentValue;
       return true;
+    }
+   return false;
   }
-  return false;
-}
 }
   // identifyInput = 'number' | 'operator', validateInput = true | false, 
   // Find type > if conditionally valid, perform operations > else fail 
