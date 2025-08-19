@@ -17,8 +17,7 @@ export class DisplayComponent {
     })
   }
 
-
-  updateDisplay(value: number) {
+  updateDisplay(value: number): void {
     this.displayValue = value;
   }
   

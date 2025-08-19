@@ -22,7 +22,6 @@ export class LogicService {
     } else {
       console.log('Number: ', value);
       this.processNumber(value);
-      this.updateDisplay();
     }
   }
 
@@ -35,8 +34,9 @@ export class LogicService {
       this.operatorValue = value;
       // If both accumulator and input valid, perform operation 
     } else {
-      console.log(this.performOperations(this.operatorValue))
-      this.accumulatorValue = (this.performOperations(this.operatorValue))
+      this.accumulatorValue = (this.performOperations(this.operatorValue));
+      this.updateAccumulatorDisplay();
+      console.log(this.accumulatorValue);
       this.operatorValue = value;
     }
   }
@@ -45,9 +45,11 @@ export class LogicService {
     // If no valid numbers set as accumulator 
     if (!this.accumulatorValue) {
       this.accumulatorValue = value;
+      this.updateAccumulatorDisplay();
       // If accumulator and operator present, set as inputValue 
     } else if (this.accumulatorValue) {
       this.inputValue = value;
+      this.updateInputDisplay();
     }
   }
 
@@ -63,13 +65,27 @@ export class LogicService {
     return 0
   }
 
-  returnDisplay() {
+  clearDisplay() {
+    this.accumulatorValue = 0; 
+    this.inputValue = 0;
+    this.operatorValue = '';
+    this.updateAccumulatorDisplay();
+  }
+
+  returnAccumulatorDisplay() {
     return this.accumulatorValue;
   }
-  private displayValue = new BehaviorSubject<number>(1);
+  returnInputDisplay() {
+    return this.inputValue;
+  }
+
+  private displayValue = new BehaviorSubject<number>(0);
   display$ = this.displayValue.asObservable(); 
-  updateDisplay() {
-    this.displayValue.next(this.returnDisplay());
+  updateAccumulatorDisplay() {
+    this.displayValue.next(this.returnAccumulatorDisplay());
+  }
+  updateInputDisplay() {
+  this.displayValue.next(this.returnInputDisplay());
   }
 }
 

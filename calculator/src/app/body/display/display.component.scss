@@ -1,5 +1,12 @@
 .display-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100px;
     width: 100px;
+}
+
+.display-values {
+    display: flex;
+    justify-content: end;
 }

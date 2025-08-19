@@ -1,9 +1,9 @@
 .calculator-container {
     display: flex; 
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #d3d3d3;
-    height: 80vw;
-    width: 60vw;
+    height: 50vw;
+    width: 50vw;
 }
