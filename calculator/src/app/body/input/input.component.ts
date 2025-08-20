@@ -37,9 +37,7 @@ export class InputComponent {
     let plainOperators = this.operatorValues.filter(item => {
       if (item !== "AC" && item !== ".") {
         return true;
-      } else {
-        return false;
-      }
+      } else return false;
     } 
   ) 
     return plainOperators;
